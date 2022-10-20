@@ -1,0 +1,31 @@
+### Logs ###
+logs
+*.log
+
+### Backup package.json files created during release ###
+*.bak
+
+### Runtime data ###
+pids
+*.pid
+*.seed
+
+### NPM modules ###
+node_modules
+
+### Test coverage ###
+spec/coverage
+
+### Custom ignores ###
+config.js
+.idea
+
+### jsdoc dir ###
+docs
+
+### ide / editors ###
+.vscode
+
+### Libraries don't need locks files ###
+yarn.lock
+package-lock.json
