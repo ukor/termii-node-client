@@ -29,3 +29,6 @@ docs
 ### Libraries don't need locks files ###
 yarn.lock
 package-lock.json
+
+.env
+lib
