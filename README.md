@@ -51,3 +51,79 @@ const verifyTokenDetails = {
 
     console.log(verifyRes, "verify response");
 ```
+
+
+- ### Switch
+Switch allows you to send messages to any country in the world across SMS and WhatsApp channel
+
+- Send Message
+
+This channel is used to send messages to phone number not on dnd
+
+```javascript
+
+const msgDetails = {
+      sms: "Testing termii node client wrapper",
+      to: '+2348000000001',
+      from: "Termii",
+    };
+
+    const termii = Termii(TERMII_KEY);
+
+    const sendsms = await termii.message().sendSms(msgDetails);
+    console.log(sendsms, "<<< send sms response");
+```
+
+
+- Send Bulk Message 
+
+```javascript
+const msgDetails = {
+      sms: "Testing termii node client wrapper",
+      to: ["+2348000000001", "+2348000000002", "+2348000000003"],
+      from: "Termii",
+    };
+
+    const termii = Termii(TERMII_KEY);
+
+    const sendBulksms = await termii.message().sendBulkSms(msgDetails);
+    console.log(sendBulksms, "<<< send sms response");
+```
+
+- Send DND Message
+
+This channel allows users to send and deliver messages to phone numbers with or without dnd restriction 
+
+For customers sending messages to Nigeria, DND stands for Do-Not-Disturb and phone numbers with DND settings activated are blocked from receiving messages from the generic route by the Mobile Network Operators.
+
+See https://developers.termii.com/messaging
+
+```javascript
+
+const msgDetails = {
+      sms: "Testing termii node client wrapper",
+      to: '+2348000000001',
+      from: "Termii",
+    };
+
+    const termii = Termii(TERMII_KEY);
+
+    const sendsms = await termii.message().sendSmsDnd(msgDetails);
+    console.log(sendsms, "<<< send sms response");
+```
+
+
+- Send Bulk Message 
+
+```javascript
+const msgDetails = {
+      sms: "Testing termii node client wrapper",
+      to: ["+2348000000001", "+2348000000002", "+2348000000003"],
+      from: "Termii",
+    };
+
+    const termii = Termii(TERMII_KEY);
+
+    const sendBulksms = await termii.message().sendBulkSmsDnd(msgDetails);
+    console.log(sendBulksms, "<<< send sms response");
+```
