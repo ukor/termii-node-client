@@ -1,6 +1,6 @@
 {
   "name": "termii-node-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJs wrapper for api.termii.com",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,7 +15,12 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "keywords": ["Termii", "sms", "token", "message"],
+  "keywords": [
+    "Termii",
+    "sms",
+    "token",
+    "message"
+  ],
   "author": "Jidechi ukor",
   "license": "MIT",
   "devDependencies": {
