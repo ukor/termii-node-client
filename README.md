@@ -1,4 +1,4 @@
-# termii_js
+# termii-node-client
 
 NodeJs wrapper for Termii API. See [termii documentation](https://developers.termii.com/)
 
