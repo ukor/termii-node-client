@@ -1,6 +1,6 @@
 {
   "name": "termii_js",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "NodeJs wrapper for api.termii.com",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -15,7 +15,7 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "keywords": [],
+  "keywords": ["Termii", "sms", "token", "message"],
   "author": "Jidechi ukor",
   "license": "MIT",
   "devDependencies": {
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ukor/termii_js.git"
+    "url": "https://github.com/ukor/termii_js.git"
   },
   "bugs": {
     "url": "https://github.com/ukor/termii_js/issues"
