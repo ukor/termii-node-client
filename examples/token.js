@@ -8,7 +8,7 @@ const TERMII_KEY = process.env.API_KEY;
     const tokenDetails = {
       pinType: "NUMERIC",
       to: "+2348000000001",
-      from: "Foodbag",
+      from: "termii",
       channel: "generic",
       pinAttempts: 1,
       timeToLive: 60,
