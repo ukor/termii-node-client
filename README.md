@@ -2,7 +2,17 @@
 
 NodeJs wrapper for Termii API. See [termii documentation](https://developers.termii.com/)
 
+# Usage
 
+- CommonJS
+```javascript
+const { Termii } = require("termii-node-client");
+```
+
+- ES module
+```javascript
+import { Termii } from "termii-node-client";
+```
 ## Tokens
 Token allows businesses generate, send and verify one-time-passwords.
 
