@@ -106,7 +106,18 @@ This channel allows users to send and deliver messages to phone numbers with or 
 
 For customers sending messages to Nigeria, DND stands for Do-Not-Disturb and phone numbers with DND settings activated are blocked from receiving messages from the generic route by the Mobile Network Operators.
 
-See https://developers.termii.com/messaging
+[Learn more about DND a blog post by Termii](https://termii.medium.com/the-dnd-service-in-nigeria-everything-you-need-to-know-72b7247e3968)
+
+DND messages on Termii is possible using Termii's default IDs; Talert or SecureOTP (Termii applies for DND IDs for only companies that have CBN/NCC license).
+
+In order to activate Termii's DND default IDs, that is already whitelisted with the Telcos on your account, you need to upload the KYC documents listed below.
+
+1. CAC document or certificate
+2. A sample of the messages you would be sending out.
+
+Promotions messages are STRICTLY not allowed on our DND route on any of Termii's default sender IDs
+
+[See Termii Documentation](https://developers.termii.com/messaging)
 
 ```javascript
 
@@ -137,3 +148,6 @@ const msgDetails = {
     const sendBulksms = await termii.message().sendBulkSmsDnd(msgDetails);
     console.log(sendBulksms, "<<< send sms response");
 ```
+
+
+## DND
