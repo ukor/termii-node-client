@@ -4,36 +4,17 @@
  */
 
 import { AxiosInstance } from "axios";
+import { BulkMessageOption, Media, PlainMessageOption, SendMessageResponse, WhatsAppMessageOption } from "../types";
 
 enum MessageChannel {
   "DND" = "dnd",
   "WHATSAPP" = "whatsapp",
   "GENERIC" = "generic",
 }
-interface Media {
-  url: string;
-  captions: string;
-}
-interface GeneralOptions {
-  from: string;
-  sms: string;
-}
-export interface PlainMessageOption extends GeneralOptions {
-  to: string;
-}
 
-export interface BulkMessageOption extends GeneralOptions {
-  to: [string];
-}
-
-export interface WhatsAppMessageOption extends PlainMessageOption {
-  media?: Media;
-}
-
-interface MessageData extends WhatsAppMessageOption {
-  api_key: string;
-  channel: MessageChannel;
-  type: string;
+enum TermiiDefaultIds {
+  "Talert" = "Talert",
+  "SecureOTP" = "SecureOTP",
 }
 
 interface BulkMessageData extends BulkMessageOption {
@@ -43,16 +24,17 @@ interface BulkMessageData extends BulkMessageOption {
   media?: Media;
 }
 
-export interface SendMessageResponse {
-  messageId: string;
-  status: boolean;
+interface MessageData extends WhatsAppMessageOption {
+  api_key: string;
+  channel: MessageChannel;
+  type: string;
 }
 
 export interface MessageService {
   sendSms(opts: PlainMessageOption): Promise<SendMessageResponse>;
   sendBulkSms(payload: BulkMessageOption): Promise<SendMessageResponse>;
-  sendSmsDnd(opts: PlainMessageOption): Promise<SendMessageResponse>;
-  sendBulkSmsDnd(payload: BulkMessageOption): Promise<SendMessageResponse>;
+  sendSmsDnd(opts: PlainMessageOption, useDefaultTermiiDefaultId: boolean): Promise<SendMessageResponse>;
+  sendBulkSmsDnd(payload: BulkMessageOption, useDefaultTermiiDefaultId: boolean): Promise<SendMessageResponse>;
   sendWhatsapp(opts: WhatsAppMessageOption): Promise<SendMessageResponse>;
 }
 
@@ -109,9 +91,15 @@ export class Message implements MessageService {
    * DND settings activated are blocked from receiving messages
    * from the generic route by the Mobile Network Operators.
    *
+   * Learn more about DND (https://termii.medium.com/the-dnd-service-in-nigeria-everything-you-need-to-know-72b7247e3968)
+   *
+   * Termii Documentation
    * https://developers.termii.com/messaging
    */
-  async sendSmsDnd(opts: PlainMessageOption): Promise<SendMessageResponse> {
+  async sendSmsDnd(opts: PlainMessageOption, useDefaultTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
+    if (useDefaultTermiiDefaultId) {
+      opts.from = TermiiDefaultIds.SecureOTP;
+    }
     const data: MessageData = {
       ...opts,
       api_key: this.apiKey,
@@ -133,7 +121,13 @@ export class Message implements MessageService {
    *
    * https://developers.termii.com/messaging
    */
-  async sendBulkSmsDnd(payload: BulkMessageOption): Promise<SendMessageResponse> {
+  async sendBulkSmsDnd(
+    payload: BulkMessageOption,
+    useDefaultTermiiDefaultId: boolean = true,
+  ): Promise<SendMessageResponse> {
+    if (useDefaultTermiiDefaultId) {
+      payload.from = TermiiDefaultIds.SecureOTP;
+    }
     const data: BulkMessageData = {
       ...payload,
       api_key: this.apiKey,
