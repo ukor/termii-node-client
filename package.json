@@ -4,6 +4,7 @@
   "description": "NodeJs wrapper for api.termii.com",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests --config jestconfig.json",
     "build": "tsc",
