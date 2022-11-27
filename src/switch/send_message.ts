@@ -56,8 +56,8 @@ export interface SendMessageResponse {
 export interface MessageService {
   sendSms(opts: PlainMessageOption): Promise<SendMessageResponse>;
   sendBulkSms(payload: BulkMessageOption): Promise<SendMessageResponse>;
-  sendSmsDnd(opts: PlainMessageOption, useDefaultTermiiDefaultId: boolean): Promise<SendMessageResponse>;
-  sendBulkSmsDnd(payload: BulkMessageOption, useDefaultTermiiDefaultId: boolean): Promise<SendMessageResponse>;
+  sendSmsDnd(opts: PlainMessageOption, useTermiiDefaultId: boolean): Promise<SendMessageResponse>;
+  sendBulkSmsDnd(payload: BulkMessageOption, useTermiiDefaultId: boolean): Promise<SendMessageResponse>;
   sendWhatsapp(opts: WhatsAppMessageOption): Promise<SendMessageResponse>;
 }
 
@@ -119,8 +119,8 @@ export class Message implements MessageService {
    * Termii Documentation
    * https://developers.termii.com/messaging
    */
-  async sendSmsDnd(opts: PlainMessageOption, useDefaultTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
-    if (useDefaultTermiiDefaultId) {
+  async sendSmsDnd(opts: PlainMessageOption, useTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
+    if (useTermiiDefaultId) {
       opts.from = TermiiDefaultIds.SecureOTP;
     }
     const data: MessageData = {
@@ -144,11 +144,8 @@ export class Message implements MessageService {
    *
    * https://developers.termii.com/messaging
    */
-  async sendBulkSmsDnd(
-    payload: BulkMessageOption,
-    useDefaultTermiiDefaultId: boolean = true,
-  ): Promise<SendMessageResponse> {
-    if (useDefaultTermiiDefaultId) {
+  async sendBulkSmsDnd(payload: BulkMessageOption, useTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
+    if (useTermiiDefaultId) {
       payload.from = TermiiDefaultIds.SecureOTP;
     }
     const data: BulkMessageData = {
