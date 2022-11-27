@@ -63,7 +63,7 @@ const verifyTokenDetails = {
 ```
 
 
-- ### Switch
+## Switch
 Switch allows you to send messages to any country in the world across SMS and WhatsApp channel
 
 - Send Message
@@ -149,5 +149,4 @@ const msgDetails = {
     console.log(sendBulksms, "<<< send sms response");
 ```
 
-
-## DND
+If your senderId has been approved for sending DND messages set `useTermiiDefaultId` to `false` in the `sendSmsDnd` and `sendBulkSmsDnd` method.
