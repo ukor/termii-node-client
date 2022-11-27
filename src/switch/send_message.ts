@@ -4,7 +4,6 @@
  */
 
 import { AxiosInstance } from "axios";
-import { BulkMessageOption, Media, PlainMessageOption, SendMessageResponse, WhatsAppMessageOption } from "../types";
 
 enum MessageChannel {
   "DND" = "dnd",
@@ -16,6 +15,31 @@ enum TermiiDefaultIds {
   "Talert" = "Talert",
   "SecureOTP" = "SecureOTP",
 }
+interface Media {
+  url: string;
+  captions: string;
+}
+interface GeneralOptions {
+  from: string;
+  sms: string;
+}
+export interface PlainMessageOption extends GeneralOptions {
+  to: string;
+}
+
+export interface BulkMessageOption extends GeneralOptions {
+  to: [string];
+}
+
+export interface WhatsAppMessageOption extends PlainMessageOption {
+  media?: Media;
+}
+
+interface MessageData extends WhatsAppMessageOption {
+  api_key: string;
+  channel: MessageChannel;
+  type: string;
+}
 
 interface BulkMessageData extends BulkMessageOption {
   api_key: string;
@@ -24,10 +48,9 @@ interface BulkMessageData extends BulkMessageOption {
   media?: Media;
 }
 
-interface MessageData extends WhatsAppMessageOption {
-  api_key: string;
-  channel: MessageChannel;
-  type: string;
+export interface SendMessageResponse {
+  messageId: string;
+  status: boolean;
 }
 
 export interface MessageService {

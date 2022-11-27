@@ -19,7 +19,7 @@ export enum PIN_TYPE {
 
 export enum CHANNEL {
   "DND" = "dnd",
-  "WHATSAPP" = "whatapp",
+  "WHATSAPP" = "whatsapp",
   "GENERIC" = "generic",
   "EMAIL" = "email",
 }
