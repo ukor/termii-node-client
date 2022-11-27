@@ -10,6 +10,11 @@ enum MessageChannel {
   "WHATSAPP" = "whatsapp",
   "GENERIC" = "generic",
 }
+
+enum TermiiDefaultIds {
+  "Talert" = "Talert",
+  "SecureOTP" = "SecureOTP",
+}
 interface Media {
   url: string;
   captions: string;
@@ -51,8 +56,8 @@ export interface SendMessageResponse {
 export interface MessageService {
   sendSms(opts: PlainMessageOption): Promise<SendMessageResponse>;
   sendBulkSms(payload: BulkMessageOption): Promise<SendMessageResponse>;
-  sendSmsDnd(opts: PlainMessageOption): Promise<SendMessageResponse>;
-  sendBulkSmsDnd(payload: BulkMessageOption): Promise<SendMessageResponse>;
+  sendSmsDnd(opts: PlainMessageOption, useTermiiDefaultId: boolean): Promise<SendMessageResponse>;
+  sendBulkSmsDnd(payload: BulkMessageOption, useTermiiDefaultId: boolean): Promise<SendMessageResponse>;
   sendWhatsapp(opts: WhatsAppMessageOption): Promise<SendMessageResponse>;
 }
 
@@ -109,9 +114,15 @@ export class Message implements MessageService {
    * DND settings activated are blocked from receiving messages
    * from the generic route by the Mobile Network Operators.
    *
+   * Learn more about DND (https://termii.medium.com/the-dnd-service-in-nigeria-everything-you-need-to-know-72b7247e3968)
+   *
+   * Termii Documentation
    * https://developers.termii.com/messaging
    */
-  async sendSmsDnd(opts: PlainMessageOption): Promise<SendMessageResponse> {
+  async sendSmsDnd(opts: PlainMessageOption, useTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
+    if (useTermiiDefaultId) {
+      opts.from = TermiiDefaultIds.SecureOTP;
+    }
     const data: MessageData = {
       ...opts,
       api_key: this.apiKey,
@@ -133,7 +144,10 @@ export class Message implements MessageService {
    *
    * https://developers.termii.com/messaging
    */
-  async sendBulkSmsDnd(payload: BulkMessageOption): Promise<SendMessageResponse> {
+  async sendBulkSmsDnd(payload: BulkMessageOption, useTermiiDefaultId: boolean = true): Promise<SendMessageResponse> {
+    if (useTermiiDefaultId) {
+      payload.from = TermiiDefaultIds.SecureOTP;
+    }
     const data: BulkMessageData = {
       ...payload,
       api_key: this.apiKey,

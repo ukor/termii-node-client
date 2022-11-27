@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Termii } = require("../lib");
 
 const TERMII_KEY = process.env.API_KEY;
+const SENDER_ID = process.env.SENDER_ID;
 
 (async () => {
   try {
@@ -10,7 +11,7 @@ const TERMII_KEY = process.env.API_KEY;
     const msgDetails = {
       sms: "Testing termii node client wrapper",
       to: to[0],
-      from: "Termii",
+      from: SENDER_ID,
     };
 
     const termii = Termii(TERMII_KEY);
@@ -19,10 +20,6 @@ const TERMII_KEY = process.env.API_KEY;
     console.log(sendsms, "<<< send sms response");
     const sendBulksms = await termii.message().sendBulkSms({ ...msgDetails, to });
     console.log(sendBulksms, "<<< send sms response");
-    const sendsmsDnd = await termii.message().sendSmsDnd(msgDetails);
-    console.log(sendsmsDnd, "<<< send sms dnd response");
-    const sendBulSmsDnd = await termii.message().sendBulkSmsDnd({ ...msgDetails, to });
-    console.log(sendBulSmsDnd, "<<< send sms dnd response");
   } catch (error) {
     console.log("message error >>>", error, "<<< message error");
   }

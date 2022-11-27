@@ -1,9 +1,10 @@
 {
   "name": "termii-node-client",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "NodeJs wrapper for api.termii.com",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests --config jestconfig.json",
     "build": "tsc",
